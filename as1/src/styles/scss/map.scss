@@ -1,0 +1,61 @@
+@media #{$desktop} {
+    .map_container, .home_localizations_map {
+        @include flex_row;
+        &_items {
+          width: calc(100% / 4);
+          min-height: 50vh;
+          
+          &_item {
+            width: calc(100% - 5px);
+            height: 60px;
+            margin-bottom: 2px;
+            margin-right: 5px;
+            border-radius: 5px;
+            padding: 10px;
+
+            &:nth-last-of-type(1) {
+              margin-bottom: 0;
+            }
+
+            &--hovered{ //TODO style this
+              
+              background: #c9ae93;
+            }
+
+            @include flex-space-between;
+
+            &_data {
+              @include flex_column;
+              h3 {
+                font-size: 15px;
+              }
+              p {
+                font-size: 10px;
+              }
+            }
+            &_img {
+              img {
+                padding: 10px 0;
+                height: 40px;
+                margin-left: 10px;
+              }
+            }
+          }
+        }
+        &_big {
+          width: calc(100% - (100% / 4) - 20px);
+          // min-height: 30vh;
+          // background: rgb(185, 185, 185);
+          margin-left: 20px;
+
+          display: flex;
+          align-items: stretch;
+
+          .map {
+            width: 100%;
+          }
+        }
+      }
+}
+@media #{$mobile} {
+}

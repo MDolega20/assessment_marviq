@@ -1,0 +1,153 @@
+@media #{$desktop} {
+    #work {
+        .section {
+            &-portfolio {
+                @include flex_column;
+
+                &-item {
+                    @include flex_row;
+                    justify-content: space-between;
+                    padding: 10px;
+                    // width: 50%;
+
+                    &-content {
+                        height: 200px;
+                        overflow: hidden;
+                        @include flex_column;
+                        // padding-right: 10px;
+
+                        h4 {
+                            font-size: 23px;
+                            font-weight: 400;
+                            margin-bottom: 10px;
+                        }
+
+                        p {
+                            font-size: 17px;
+                            font-weight: 400;
+                            margin-bottom: 10px;
+                            padding-right: 10px;
+
+                            &:nth-last-of-type(1) {
+                                margin-bottom: 0;
+                            }
+                        }
+
+                        &-hyperlink {
+                            @include flex_column;
+                            margin-top: 20px;
+
+                            a {
+                                padding-top: 5px;
+                                padding-bottom: 5px;
+                            }
+                        }
+                    }
+
+                    &-image {
+                        @include flex_row;
+
+                        &-item {
+                            img {
+                                height: 200px;
+                                // width: 100px;
+                                margin-right: 5px;
+                            }
+
+                            &:nth-last-of-type(1) {
+                                img {
+                                    margin-right: 0;
+                                }
+                            }
+                        }
+
+                    }
+                }
+            }
+            &-top{
+                @include flex_row;
+                padding-top: 3rem;
+                padding-bottom: 5rem;
+                &-item{
+                    width: calc(100% / 4);
+                    img{
+                        width: 100%;
+                        // padding: 1rem;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media #{$mobile} {
+    #work {
+        .section {
+            &-portfolio {
+                @include flex_column;
+
+                &-item {
+                    @include flex_column;
+                    justify-content: space-between;
+                    // width: 50%;
+
+                    &-content {
+                        padding: 1rem;
+                        overflow: hidden;
+                        @include flex_column;
+
+                        h4 {
+                            font-size: 1.4rem;
+                            font-weight: 400;
+                            margin-bottom: 0.7rem;
+                        }
+
+                        p {
+                            font-size: 1.1rem;
+                            font-weight: 400;
+                            margin-bottom: 10px;
+                            padding-right: 10px;
+
+                            &:nth-last-of-type(1) {
+                                margin-bottom: 0;
+                            }
+                        }
+
+                        &-hyperlink {
+                            @include flex_column;
+                            margin-top: 20px;
+
+                            a {
+                                padding-top: 5px;
+                                padding-bottom: 5px;
+                            }
+                        }
+                    }
+
+                    &-image {
+                        @include flex_row;
+                        overflow-x: scroll;
+                        padding-left: 1rem;
+                        padding-top: 1rem;
+                        padding-bottom: 1rem;
+
+                        &-item {
+                            img {
+                                height: 13rem;
+                                // width: 100px;
+                                margin-right: 5px;
+                            }
+
+                            &:nth-last-of-type(1) {
+                                img {
+                                    margin-right: 0;
+                                }
+                            }
+                        }
+
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,239 @@
+$header-background: #CF8B63;
+$main-background: #FAE1CA;
+
+$navigation-underline-color: #7272ab;
+
+$footer-background: #CF8B63;
+
+$login-button-background: #dadada;
+
+// nav menu hover animations
+$duration: 0.2s;
+$distance: 8px;
+$easeOutBack: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+$shadow_1: 0 5px 15px -5px rgba(0, 0, 0, 0.5);
+$shadow_1_plus_5: 0 10px 15px -5px rgba(0, 0, 0, 0.5);
+
+button {
+  cursor: pointer;
+
+  a {
+    color: #000;
+  }
+}
+
+input,
+textarea {
+  box-shadow: $shadow_1;
+}
+
+$primaryColor: #3d3d3d;
+$accentColor: #ff7f11;
+$accentGradient: linear-gradient(315deg, #f7b42c 0%, #fc575e 74%);
+
+%highlite {
+  color: $accentColor;
+}
+
+strong {
+  @extend %highlite;
+}
+
+header {
+  background: $header-background;
+}
+
+footer {
+  border-top: 1px solid $footer-background;
+  background-color: $footer-background;
+
+  #nav-lang-container {
+    .nav-lang-item {
+      &-content {
+        &--active {
+          @extend %highlite;
+        }
+      }
+    }
+  }
+}
+
+main {
+  background-color: $main-background;
+
+  .main_content{
+    a {
+      @extend %highlite;
+  
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  
+  // nav{
+  //   a {
+  //     color: $accentGradient;
+  //     position: relative;
+  //     text-decoration: none;
+  //     padding-bottom: 4px;
+
+  //     &:before,
+  //     &:after {
+  //       content: "";
+  //       position: absolute;
+  //       bottom: 2px;
+  //       left: 0;
+  //       right: 0;
+  //       height: 2px;
+  //       background-color: $accentColor;
+  //     }
+
+  //     &:before {
+  //       opacity: 0;
+  //       transform: translateY(-$distance);
+  //       transition: transform 0s $easeOutBack, opacity 0s;
+  //     }
+
+  //     &:after {
+  //       opacity: 0;
+  //       transform: translateY($distance/2);
+  //       transition: transform $duration $easeOutBack, opacity $duration;
+  //     }
+
+  //     &:hover,
+  //     &:focus {
+
+  //       &:before,
+  //       &:after {
+  //         opacity: 1;
+  //         transform: translateY(0);
+  //       }
+
+  //       &:before {
+  //         transition: transform $duration $easeOutBack, opacity $duration;
+  //       }
+
+  //       &:after {
+  //         transition: transform 0s $duration $easeOutBack, opacity 0s $duration;
+  //       }
+  //     }
+
+  //     &:hover {
+  //       color: $accentColor;
+  //     }
+  //   }
+  // }
+}
+
+#contact {
+  .section {
+    &-form {
+      @mixin error() {
+        label {
+          .section-form-error {
+
+            // box-shadow: $shadow_1;
+            span {
+              color: $accentColor;
+            }
+          }
+        }
+      }
+
+      &-input {
+        @include error();
+
+        label {
+          input {
+            border: 1px solid #eeeeee;
+            background: #eeeeee;
+          }
+        }
+      }
+
+      &-textarea {
+        @include error();
+
+        label {
+          textarea {
+            border: 1px solid #eeeeee;
+            background: #eeeeee;
+          }
+        }
+      }
+
+      &-bottom {
+        button {
+          border: none;
+          background: $accentGradient;
+          color: #fff;
+          box-shadow: $shadow_1;
+
+          &:hover{
+            box-shadow: $shadow_1_plus_5
+          }
+        }
+      }
+    }
+
+    &-social-media {
+      &-item {
+        a {
+          box-shadow: $shadow_1;
+
+          &:hover {
+            box-shadow: $shadow_1_plus_5
+          }
+        }
+      }
+    }
+    &-map {
+      box-shadow: $shadow_1;
+    }
+  }
+}
+
+#home {
+  .section {
+    &-image-me {
+      img {
+        box-shadow: $shadow_1;
+      }
+    }
+    &-contact{
+      &-button {
+        a {
+          border: none;
+          background: $accentGradient;
+          color: #fff;
+          box-shadow: $shadow_1;
+
+          &:hover{
+            box-shadow: $shadow_1_plus_5
+          }
+        }
+      }
+    }
+  }
+}
+
+#offer {
+  .section {
+    &-list {
+      &-item {
+        box-shadow: $shadow_1;
+
+        &-name {
+          h4 {}
+        }
+
+        &-description {
+          p {}
+        }
+      }
+    }
+
+  }
+}

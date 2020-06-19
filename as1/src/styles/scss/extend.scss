@@ -1,0 +1,41 @@
+@mixin margin-0-auto(){
+    margin: 0 auto;
+}
+@mixin flex-column(){
+    display: flex;
+    flex-direction: column;
+}
+@mixin flex-row(){
+    display: flex;
+    flex-direction: row;
+}
+@mixin flex-row-center(){
+    justify-content: center;
+}
+@mixin flex-space-between(){
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+@mixin width-100(){
+    width: 100%;
+}
+@mixin width-normal(){
+    width: $max-width-for-desktop;
+    @include margin-0-auto;
+}
+@mixin mobile-normal(){
+    width: calc(100% - 2rem);
+    padding: 1rem;
+    @include margin-0-auto;
+}
+@mixin default-button(){
+    border-radius: $button-default-border-radius;
+}
+@mixin default-image(){
+    border-radius: $image-default-border-radius;
+}
+@mixin default-style-reset(){
+    list-style: none;
+    list-style-type: none;
+}

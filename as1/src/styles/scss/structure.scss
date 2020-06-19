@@ -1,0 +1,39 @@
+$font-family: 'Merriweather', serif;
+$button-default-border-radius: 10px;
+$image-default-border-radius: 3px;
+
+$header-height: 84px;
+
+// $desktop-min-width: 501px;
+// $max-width-for-desktop: 800px;
+// $mobile-min-width: 300px;
+// $mobile-max-width: 500px;
+$desktop-min-width: 1000px;
+$mobile-min-width: 300px;
+$mobile-max-width: 999px;
+$max-width-for-desktop: 1100px;
+
+$mobile: screen and (min-width : $mobile-min-width) and (max-width : $mobile-max-width);
+$desktop: screen and (min-width: $desktop-min-width) ;
+// $big-desktop: screen and (min-width: $max-width-for-desktop) ;
+
+@import 'theme_1';
+@import 'extend';
+@import 'primary';
+
+@import 'header';
+@import 'footer';
+@import 'main';
+
+@import 'home';
+@import 'map';
+@import 'trees';
+@import 'sales';
+@import 'contact';
+@import 'error';
+
+@media #{$desktop} {
+    .mobile{
+        display: none;
+    }
+}

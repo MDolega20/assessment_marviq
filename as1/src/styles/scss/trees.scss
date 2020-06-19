@@ -1,0 +1,146 @@
+@media #{$desktop}  {
+    .tree, .home_tree, .sales-detail-prices, .sales-mass-prices {
+        @include width_normal;
+        @include flex_column;
+  
+        &_title {
+          margin-top: 30px;
+          margin-bottom: 30px;
+          h3 {
+            text-align: center;
+          }
+        }
+        &_content {
+          @include flex_column;
+          flex-wrap: wrap;
+  
+          &_item {
+            width: calc(100% / 1.5 - 30px);
+            margin-bottom: 20px;
+  
+            @include flex_row;
+  
+            align-self: center;
+  
+            &_image{
+              width: calc(50% - 30px);
+              margin-right: 50px;
+              // margin-top: 20px;
+              margin-bottom: 20px;
+              
+              @include flex_row;
+  
+              justify-content: flex-end;
+  
+              img {
+                display: block;
+                border-radius: 7px;
+                width: calc(100vw / 5);
+              }
+            }
+            &_data{
+              &_name{
+                h3{
+                  text-transform: capitalize;
+  
+                  margin-bottom: 20px;
+                }
+              }
+              &_prices{
+                h4{
+                  margin-bottom: 10px;
+                }
+                ul{
+                  list-style-position: inside;
+                  margin-bottom: 20px;
+  
+                  li{
+  
+                  }
+                }
+              }
+            }
+            
+            &--active {
+              img {
+                display: none;
+              }
+              p {}
+            }
+          }
+        }
+    }
+}
+@media #{$mobile} {
+  .tree, .home_tree, .sales-detail-prices, .sales-mass-prices {
+    @include mobile_normal;
+    @include flex_column;
+
+    &_title {
+      margin-top: 1.875rem;
+      margin-bottom: 1.875rem;
+      h3 {
+        text-align: center;
+      }
+    }
+    &_content {
+      @include flex_column;
+      flex-wrap: wrap;
+
+      &_item {
+        width: calc(100%);
+        margin-bottom: 1.25rem;
+
+        @include flex_column;
+
+        text-align: center;
+
+        &_image{
+          width: calc(100%);
+          margin-bottom: 1.25rem;
+
+          
+          @include flex_row;
+
+          justify-content: flex-end;
+
+          img {
+            display: block;
+            border-radius: 7px;
+            width: calc(100% / 1.5);
+            margin: 0 auto;
+          }
+        }
+        &_data{
+          &_name{
+            h3{
+              text-transform: capitalize;
+
+              margin-bottom: 20px;
+            }
+          }
+          &_prices{
+            h4{
+              margin-bottom: 10px;
+            }
+            ul{
+              list-style-position: inside;
+              margin-bottom: 20px;
+
+              li{
+
+              }
+            }
+          }
+        }
+        
+        &--active {
+          img {
+            display: none;
+          }
+          p {}
+        }
+      }
+    }
+}
+}
