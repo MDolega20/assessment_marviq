@@ -7,7 +7,7 @@ import logo from '../../img/logo_1.png';
 const HeaderItem = () => {
     return <div className="header">
         <div className="header_title">
-            <img src={logo} alt="logo"/>
+        Assessment a
         </div>
         <div className="header_logo">
             <div className="squere"></div>

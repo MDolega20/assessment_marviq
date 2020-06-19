@@ -25,12 +25,12 @@ $desktop: screen and (min-width: $desktop-min-width) ;
 @import 'footer';
 @import 'main';
 
-@import 'home';
-@import 'map';
-@import 'trees';
-@import 'sales';
-@import 'contact';
-@import 'error';
+// @import 'home';
+// @import 'map';
+// @import 'trees';
+// @import 'sales';
+// @import 'contact';
+// @import 'error';
 
 @media #{$desktop} {
     .mobile{
