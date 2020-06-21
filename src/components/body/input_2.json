@@ -1,0 +1,5 @@
+{
+  "2x2 brick mould": "warning/orange",
+  "3x2 brick mould": "fatal/red",
+  "4x2 brick mould": "good/green"
+}

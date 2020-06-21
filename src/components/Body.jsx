@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
-// import PropTypes from 'prop-types';
 
 import Main from './body/Main';
-import Header from './body/Header';
-import Footer from './body/Footer';
 
 class Body extends Component {
   devMode() {
@@ -14,9 +11,7 @@ class Body extends Component {
   render() {
     return (
       <>
-        <Header />
         <Main />
-        <Footer />
       </>
     );
   }
