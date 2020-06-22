@@ -1,5 +1,13 @@
 $font-family: 'Merriweather', serif;
 
+$desktop-min-width: 1000px;
+$mobile-min-width: 300px;
+$mobile-max-width: 999px;
+$max-width-for-desktop: 1100px;
+
+$mobile: screen and (min-width : $mobile-min-width) and (max-width : $mobile-max-width);
+$desktop: screen and (min-width: $desktop-min-width) ;
+
 *{
     font-family: $font-family;
 }
@@ -13,6 +21,13 @@ $font-family: 'Merriweather', serif;
     flex-direction: column;
 }
 
+main{
+    width: calc(100% - 10vw);
+    margin: 0 auto;
+}
+
+
+
 .machines{
     @include flex_col;
 
@@ -21,9 +36,17 @@ $font-family: 'Merriweather', serif;
         margin: 10px;
 
         display: grid;
-        grid-template-columns: auto 60%;
-        grid-template-rows: auto 591 120;
-        grid-template-areas: "name name""details chart""ui_c chart";
+        @media #{$desktop}{
+            grid-template-columns: auto 60%;
+            grid-template-rows: auto 591px 200px;
+            grid-template-areas: "name name""details chart""ui_c ui_c";
+        }
+        @media #{$mobile} {
+            grid-template-columns: auto;
+            grid-template-rows: auto auto auto;
+            grid-template-areas: "name""details""ui_c""chart";
+        }
+
 
         h3{
 
@@ -43,6 +66,12 @@ $font-family: 'Merriweather', serif;
                 @include flex_row;
                 justify-content: flex-end;
             }
+            button{
+                padding: 0 15px;
+                border-radius: 5px;
+                border: none;
+                color: #fff;
+            }
         }
         &_details{
             grid-area: details;
@@ -51,9 +80,12 @@ $font-family: 'Merriweather', serif;
             &_row{
                 @include flex_row;
                 justify-content: space-between;
-                &>div:nth-last-of-type(1)>p{
-                    @include flex_row;
-                    justify-content: flex-end;
+                &>div:nth-last-of-type(1){
+                    &>p,&>h4{
+                        @include flex_row;
+                        justify-content: flex-end;
+
+                    }
                 }
             }
         }
@@ -78,12 +110,14 @@ $font-family: 'Merriweather', serif;
                 p{
                     display: inline-block;
                     line-height: 20px;
+                    margin-bottom: 0;
                 }
                 input{
                     display: inline-block;
                     height: 20px;
                     margin: calc(16px) 0;
                     margin-right: 10px;
+                    margin-bottom: 0;
                 }
             }
         }

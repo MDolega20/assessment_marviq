@@ -25,12 +25,14 @@ const Machine = (props) => {
         OEE
     } = props.machineData,
     {controlMachine} = props,
-    [rounds, setRound] = useState({
+    [uiControls, setUiControls] = useState({
         numbers: false,
-        percentage: false
+        percentage: false,
+        randomTemp: false,
+        unitsTemp: true
     }),
     round = (type, value) => {
-        setRound(prevState => ({
+        setUiControls(prevState => ({
             ...prevState,
             [type]: value
           }));
@@ -48,6 +50,17 @@ const Machine = (props) => {
             hidden: true
         }],
         labels: Array.from(Array(24), (_, i) => i + 1)
+    },
+    chartOptions = {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
     }
 
     return <div class="machines_item">
@@ -55,7 +68,6 @@ const Machine = (props) => {
             <h2>{MACHINE}</h2>
         </div>
         <div class="machines_item_details">
-            {/* <h3>Details</h3> */}
             <div class="machines_item_details_row">
                 <div>
                     <h4>Machine name</h4>
@@ -65,7 +77,9 @@ const Machine = (props) => {
                     <h4>Controls</h4>
                     <div>
                     {
-                        isRunning ? <button onClick={() => controlMachine(machineId, false)}>Stop</button> : <button onClick={() => controlMachine(machineId, true)}>Start</button>
+                        isRunning ? 
+                        <button onClick={() => controlMachine(machineId, false)} style={{background: "red"}}>Stop</button> : 
+                        <button onClick={() => controlMachine(machineId, true)} style={{background: "green"}}>Start</button>
                     }
                     </div>
                 </div>
@@ -77,63 +91,66 @@ const Machine = (props) => {
                 </div>
                 <div>
                     <h4>Temperature</h4>
-                    <p style={{color: machineStatusColor}}>{temperatureRange}</p>
+                    <p style={{color: machineStatusColor}}>{uiControls.randomTemp ? temperature: temperatureRange} { uiControls.unitsTemp ? "°C" : "" }</p>
                 </div>
             </div>
             <div class="machines_item_details_row">
                 <div>
                     <h4>Uptime</h4>
-                    <p>{uptime}</p>
+                    <p>{uptime} sec</p>
                 </div>
                 <div>
                     <h4>Downtime</h4>
-                    <p>{downtime}</p>
+                    <p>{downtime} sec</p>
                 </div>
             </div>
-            {/* <div>
-                <h4>Datetime</h4>
-                <p>form {DATETIME_FROM} </p>
-                <p>to {DATETIME_TO}</p>
-            </div> */}
             <div class="machines_item_details_row">
                 <div>
                     <h4>Scrap procentage</h4>
-                    <p>{rounds.percentage ? (SCRAP_PERCENTAGE * 100).toFixed() : SCRAP_PERCENTAGE * 100} %</p>
+                    <p>{uiControls.percentage ? (SCRAP_PERCENTAGE * 100).toFixed() : SCRAP_PERCENTAGE * 100} %</p>
                 </div>
                 <div>
                     <h4>Downtime percentage</h4>
-                    <p>{rounds.percentage ? (DOWNTIME_PERCENTAGE * 100).toFixed() : DOWNTIME_PERCENTAGE * 100} %</p>
+                    <p>{uiControls.percentage ? (DOWNTIME_PERCENTAGE * 100).toFixed() : DOWNTIME_PERCENTAGE * 100} %</p>
                 </div>
             </div>
             <div class="machines_item_details_row">
                 <div>
                     <h4>Net production</h4>
-                    <p>{rounds.numbers ? (PRODUCTION).toFixed() : PRODUCTION}</p>
+                    <p>{uiControls.numbers ? (PRODUCTION).toFixed() : PRODUCTION}</p>
                 </div>
                 <div>
                     <h4>Net production without scrap</h4>
-                    <p>{rounds.numbers ? (PRODUCTION - PRODUCTION * SCRAP_PERCENTAGE).toFixed() : PRODUCTION - PRODUCTION * SCRAP_PERCENTAGE}</p>
+                    <p>{uiControls.numbers ? (PRODUCTION - PRODUCTION * SCRAP_PERCENTAGE).toFixed() : PRODUCTION - PRODUCTION * SCRAP_PERCENTAGE}</p>
                 </div>
             </div>
             <div>
                 <h4>Overall Equipment Efficiency</h4>
-                <p>{rounds.percentage ? (OEE * 100).toFixed() : OEE * 100} %</p>
+                <p>{uiControls.percentage ? (OEE * 100).toFixed() : OEE * 100} %</p>
             </div>
         </div>
         <div class="machines_item_chart">
             <h3>Net production</h3>
-            <Line data={chartData} height="200px" />
+            <Line data={chartData} maintainAspectRatio={false} height="210px" responsive={false} options={chartOptions}/>
         </div>
         <div class="machines_item_ui_c">
             <h4>User interface switches</h4>
             <div>
                 <label>
-                    <input type="checkbox" checked={rounds.percentage} onChange={(c) => round("percentage", c.target.checked)}/>
+                    <input type="checkbox" checked={uiControls.percentage} onChange={(c) => round("percentage", c.target.checked)}/>
                     <p>round procents</p>
                 </label>
                 <label>
-                    <input type="checkbox" checked={rounds.numbers} onChange={(c) => round("numbers", c.target.checked)}/>
+                    <input type="checkbox" checked={uiControls.numbers} onChange={(c) => round("numbers", c.target.checked)}/>
                     <p>round production</p>
+                </label>
+                <label>
+                    <input type="checkbox" checked={uiControls.randomTemp} onChange={(c) => round("randomTemp", c.target.checked)}/>
+                    <p>random temperature</p>
+                </label>
+                <label>
+                    <input type="checkbox" checked={uiControls.unitsTemp} onChange={(c) => round("unitsTemp", c.target.checked)}/>
+                    <p>temperature units</p>
                 </label>
             </div>
         </div>
@@ -152,9 +169,9 @@ const Machines = () => {
     }
 
     useEffect(() => {
-        let data = require('./input_1.json'),
-        data2 = require('./input_2.json'),
-        data3 = require('./input_3.json');
+        let data = require('./input_1.json'), // as 1
+        data2 = require('./input_2.json'), // as 2
+        data3 = require('./input_3.json'); // as 3
 
         data.forEach((machine, index) => {
             let {H0,H1,H2,H3,H4,H5,H6,H7,H8,H9,H10,H11,H12,H13,H14,H15,H16,H17,H18,H19,H20,H21,H22,H23} = machine;
@@ -168,9 +185,14 @@ const Machines = () => {
             machine.productionPerHour = [H0,H1,H2,H3,H4,H5,H6,H7,H8,H9,H10,H11,H12,H13,H14,H15,H16,H17,H18,H19,H20,H21,H22,H23]
 
             machine.productionPerHourWithoutScrap = [];
-
+            // calculate real production without scrap
             machine.productionPerHour.forEach((p) => {machine.productionPerHourWithoutScrap.push(p - p * machine.SCRAP_PERCENTAGE)});
 
+            const getRandomTemperature = (min, max) => {
+                return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
+            }
+
+            // set status 
             for (var d in data2){
                 if (data2.hasOwnProperty(d)) {
                     if(d === machine.MACHINE){
@@ -181,12 +203,15 @@ const Machines = () => {
                         switch (machine.machineStatus) {
                             case "good/green":
                                 machine.temperatureRange = "default"
+                                machine.temperature = getRandomTemperature(0,84)
                                 break;
                             case "warning/orange":
                                 machine.temperatureRange = "85-100"
+                                machine.temperature = getRandomTemperature(85,100)
                                 break;
                             case "fatal/red":
                                 machine.temperatureRange = "100+"
+                                machine.temperature = getRandomTemperature(101,150)
                                 break;
                             default:
                                 break;
@@ -195,14 +220,9 @@ const Machines = () => {
                 }
             }
 
-            machine.temperature = null
+            // machine.temperature = null
 
-            // An OEE is a percentage calculated by multiplying 3 percentages:
-
-            // Performance% = actual gross production / norm gross production * 100%
-            // Availability% = actual uptime / norm uptime * 100%
-            // Quality% = (actual gross production - actual scrap) / actual gross production * 100% 
-
+            // set ooc
             data3.forEach((d3, index3) => {
                 if(index3 === index){
                     machine.PERFORMANCE = d3.PERFORMANCE;
@@ -210,11 +230,7 @@ const Machines = () => {
                     machine.QUALITY = d3.QUALITY;
                     machine.OEE = d3.OEE;
                 }
-            });
-
-            // machine.roundPercentage = false
-            // machine.roundNumbers = false
-            
+            });          
 
             data[index] = machine;
         });
